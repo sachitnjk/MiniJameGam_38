@@ -34,7 +34,9 @@ public class ContractedThievesUiController : MonoBehaviour
 
     private void ShowHidePanel()
     {
-        if (!isVisible)
+        UIManager uiManager = UIManager.Instance;
+        
+        if (!isVisible && !uiManager.isManagingThieves)
         {
             isVisible = true;
             contractedThievesPanel?.SetActive(true);

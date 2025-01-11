@@ -33,7 +33,7 @@ public class EventManager : MonoBehaviour
     {
         OnCharacterBuffSelected?.Invoke(buff);
     }
-
+    
     #endregion
     
 }

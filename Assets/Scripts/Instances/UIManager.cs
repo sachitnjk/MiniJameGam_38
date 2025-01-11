@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
+    public bool isManagingThieves { get; private set; }
+
     private void Awake()
     {
         if (Instance == null)
@@ -17,5 +19,10 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void SetIsManagingThievesStatus(bool status)
+    {
+        isManagingThieves = status;
     }
 }
