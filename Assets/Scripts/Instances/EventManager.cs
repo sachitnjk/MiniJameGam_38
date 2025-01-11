@@ -7,6 +7,9 @@ public class EventManager : MonoBehaviour
 {
     public static EventManager Instance;
 
+    public Action<Sprite> OnCharacterVisualSelected;
+    public Action<CharacterPassiveBuff> OnCharacterBuffSelected;
+    
     private void Awake()
     {
         if (Instance == null)
@@ -18,4 +21,19 @@ public class EventManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    #region InvokeFunctions
+
+    public void InvokeOnCharacterVisualSelected(Sprite sprite)
+    {
+        OnCharacterVisualSelected?.Invoke(sprite);
+    }
+
+    public void InvokeOnCharacterBuffSelected(CharacterPassiveBuff buff)
+    {
+        OnCharacterBuffSelected?.Invoke(buff);
+    }
+
+    #endregion
+    
 }
