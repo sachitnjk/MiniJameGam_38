@@ -119,3 +119,12 @@ public class PlayerInfo : MonoBehaviour
         }
     }
 }
+
+public struct PlayerData
+{
+    public Sprite PlayerHeadAppearance;
+    public string Name;
+    public ThiefTiers Tier;
+    public int Experience;
+    public int Loyalty;
+}

@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e1df0718c7f0c740b3a9b58bc794c2e, type: 3}
+  m_Name: AllThiefNames
+  m_EditorClassIdentifier: 
+  names:
+  - Swipey McGee
+  - Sneaky Pete
+  - Lootin' Lenny
+  - Nabster Nick
+  - Fingers Malone
+  - Pilfering Percy
+  - Griftin' Griffin
+  - Masked Marauder
+  - Shadow Steve
+  - Snatchin' Sally
+  - Sly Sarah
+  - Mischief Molly
+  - Cunning Quin
+  - Daring Dina
+  - Tricky Tina
+  - Hustlin Raechel
+  - Larcenous Lily
+  - Silent Sid
+  - Lightfoot Larry
+  - Chad
+  - Dave
+  - Brad Pitt-pocket
+  - Rob Low
+  - Zero
+  - Seven
+  - Heistman Hank
+  - Klepto Paltrow
+  - Shifty Sylvia
+  - Celpto Lopez
+  - Stealy Cyrus
