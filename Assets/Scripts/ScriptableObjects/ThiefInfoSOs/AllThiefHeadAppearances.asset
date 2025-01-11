@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: AllThiefHeadAppearances
   m_EditorClassIdentifier: 
   headAppearance:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1355785744, guid: dd9f97fa1f33fa841adfad70ae35c569, type: 3}
+  - {fileID: -1778200885, guid: dd9f97fa1f33fa841adfad70ae35c569, type: 3}
+  - {fileID: -893658717, guid: dd9f97fa1f33fa841adfad70ae35c569, type: 3}
+  - {fileID: 655651517, guid: dd9f97fa1f33fa841adfad70ae35c569, type: 3}
+  - {fileID: 380452687, guid: dd9f97fa1f33fa841adfad70ae35c569, type: 3}
+  - {fileID: -2853168, guid: dd9f97fa1f33fa841adfad70ae35c569, type: 3}
+  - {fileID: -352575993, guid: dd9f97fa1f33fa841adfad70ae35c569, type: 3}

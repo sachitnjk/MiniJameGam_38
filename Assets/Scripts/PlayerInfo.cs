@@ -11,10 +11,15 @@ public class PlayerInfo : MonoBehaviour
     [SerializeField] private int startingLevel;
     [SerializeField] private int startingMoney;
     [SerializeField] private int startingHatTier;
-    // [SerializeField] private List<ThiefInfo> startingThievesUnderContract;
+    [SerializeField] private List<ThiefData> startingThievesUnderContract = new List<ThiefData>();
     
     [Header("References")]
     [SerializeField] private SpriteRenderer characterSpriteRenderer;
+
+    [SerializeField] private GameObject TigerBossVisual;
+    [SerializeField] private GameObject BearBossVisual;
+    [SerializeField] private GameObject XBossVisual;
+    [SerializeField] private GameObject YBossVisual;
     
     private Sprite selectedCharacterVisual;
     private CharacterPassiveBuff selectedCharacterPassiveBuff;
@@ -24,35 +29,63 @@ public class PlayerInfo : MonoBehaviour
     private int currentLevel;
     private int currentMoney;
 
-    // private List<ThiefInfo> thievesUnderContract = new List<ThiefInfo>();
+    private List<ThiefData> thievesUnderContract = new List<ThiefData>();
 
     private void Start()
     {
-        // thievesUnderContract?.AddRange(startThievesUnderContract);
+        foreach (ThiefData thief in startingThievesUnderContract)
+        {
+            AddThievesUnderContract(thief);
+        }
 
         EventManager.Instance.OnCharacterVisualSelected += HandleOnCharacterVisualSelected;
+        EventManager.Instance.OnCharacterBuffSelected += HandleOnCharacterBuffSelected;
         // EventManager.Instance?.OnMoneyChange += HandleOnMoneyChange;
     }
 
     private void OnDestroy()
     {
         EventManager.Instance.OnCharacterVisualSelected -= HandleOnCharacterVisualSelected;
+        EventManager.Instance.OnCharacterBuffSelected -= HandleOnCharacterBuffSelected;
         // EventManager.Instance?.OnMoneyChange += HandleOnMoneyChange;
     }
 
-    private void HandleOnCharacterVisualSelected(Sprite characterSprite)
+    #region Event Handlers
+
+    private void HandleOnCharacterVisualSelected(int characterSpriteInt)
     {
-        selectedCharacterVisual = characterSprite;
-        characterSpriteRenderer.sprite = selectedCharacterVisual;
+        TigerBossVisual?.SetActive(false);
+        BearBossVisual?.SetActive(false);
+        XBossVisual?.SetActive(false);
+        YBossVisual?.SetActive(false);
+        
+        switch (characterSpriteInt)
+        {
+            case 1:
+                TigerBossVisual?.SetActive(true);
+                break;
+            case 2:
+                BearBossVisual?.SetActive(true);
+                break;
+            case 3:
+                XBossVisual?.SetActive(true);
+                break;
+            case 4:
+                YBossVisual?.SetActive(true);
+                break;
+            default:
+                BearBossVisual?.SetActive(false);
+                break;
+        }
+    }
+
+    private void HandleOnCharacterBuffSelected(CharacterPassiveBuff characterPassiveBuff)
+    {
+        selectedCharacterPassiveBuff = characterPassiveBuff;
     }
     
     private void HandleOnMoneyChange(bool moneyAdded, int amount)
     {
-        // if (currentMoney < startingMoney)
-        // {
-        //     //gameOver?
-        // }
-
         if (moneyAdded)
         {
             currentMoney += amount;
@@ -65,6 +98,10 @@ public class PlayerInfo : MonoBehaviour
         
         LevelChangeCheck();
     }
+    
+    #endregion
+
+    #region Helpers
 
     private void LevelChangeCheck()
     {
@@ -118,11 +155,20 @@ public class PlayerInfo : MonoBehaviour
                 break;
         }
     }
+
+    private void AddThievesUnderContract(ThiefData thiefData)
+    {
+        thievesUnderContract.Add(thiefData);
+    }
+
+    #endregion
+    
 }
 
-public struct PlayerData
+[System.Serializable]
+public struct ThiefData
 {
-    public Sprite PlayerHeadAppearance;
+    public Sprite ThiefHeadAppearance;
     public string Name;
     public ThiefTiers Tier;
     public int Experience;

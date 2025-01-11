@@ -7,7 +7,7 @@ public class EventManager : MonoBehaviour
 {
     public static EventManager Instance;
 
-    public Action<Sprite> OnCharacterVisualSelected;
+    public Action<int> OnCharacterVisualSelected;
     public Action<CharacterPassiveBuff> OnCharacterBuffSelected;
     
     private void Awake()
@@ -24,9 +24,9 @@ public class EventManager : MonoBehaviour
 
     #region InvokeFunctions
 
-    public void InvokeOnCharacterVisualSelected(Sprite sprite)
+    public void InvokeOnCharacterVisualSelected(int spriteInt)
     {
-        OnCharacterVisualSelected?.Invoke(sprite);
+        OnCharacterVisualSelected?.Invoke(spriteInt);
     }
 
     public void InvokeOnCharacterBuffSelected(CharacterPassiveBuff buff)
