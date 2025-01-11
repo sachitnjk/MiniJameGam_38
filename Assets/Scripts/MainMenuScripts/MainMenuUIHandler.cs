@@ -34,12 +34,12 @@ public class MainMenuUIHandler : MonoBehaviour
 
         if (audioSettingsButton != null)
         {
-            
+            audioSettingsButton.onClick.AddListener(OpenAudioSettingsPanel);
         }
 
         if (creditsButton != null)
         {
-            
+            creditsButton.onClick.AddListener(OpenCreditsPanel);
         }
         
         if (exitButton != null)
