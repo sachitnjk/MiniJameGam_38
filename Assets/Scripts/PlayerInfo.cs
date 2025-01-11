@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
@@ -15,6 +16,7 @@ public class PlayerInfo : MonoBehaviour
     
     [Header("References")]
     [SerializeField] private SpriteRenderer characterSpriteRenderer;
+    [SerializeField] private List<GameObject> allLevelHats = new List<GameObject>();
 
     [SerializeField] private GameObject TigerBossVisual;
     [SerializeField] private GameObject BearBossVisual;
