@@ -20,7 +20,7 @@ public class ThiefInfoGenerator : MonoBehaviour
     {
         
         int generatedThieves = Random.Range(5, maxThievesToGenerate);
-
+        // int generatedThieves = 4;
         for (int i = 0; i < generatedThieves; i++)
         {
             ThiefTiers randomlyPickedTier = GetRandomThiefTier();
@@ -62,12 +62,12 @@ public class ThiefInfoGenerator : MonoBehaviour
     
     private ThiefTiers GetRandomThiefTier()
     {
-        ThiefTiers thiefTier = ThiefTiers.None;
+        ThiefTiers thiefTier;
         // Get all the values of the ThiefTiers enum
         ThiefTiers[] values = (ThiefTiers[])System.Enum.GetValues(typeof(ThiefTiers));
         
         // Generate a random index
-        int randomIndex = Random.Range(0, values.Length);
+        int randomIndex = Random.Range(1, values.Length);
         
         // Assign a random value to the thiefTier variable
         thiefTier = values[randomIndex];

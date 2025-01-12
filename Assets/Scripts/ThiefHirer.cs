@@ -26,6 +26,7 @@ public class ThiefHirer : MonoBehaviour
     {
         if (GameManager.Instance.CurrentMoney >= currentHireThiefInfo.cost)
         {
+            GameManager.Instance.WithdrawMoney(currentHireThiefInfo.cost);
             EventManager.Instance?.InvokeOnThiefHired(currentHireThiefInfo);
         }
         else

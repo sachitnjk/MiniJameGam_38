@@ -9,6 +9,8 @@ public class ContractedThievesUiController : MonoBehaviour
 {
     [SerializeField] private Button showHideButton;
     [SerializeField] private GameObject contractedThievesPanel;
+    [SerializeField] private RectTransform ThiefDataPrefab;
+    [SerializeField] private Transform thiefDataParent;
 
     private Animator contractedThievesPanelAnimator;
     public bool isVisible { get; private set; }
@@ -30,6 +32,13 @@ public class ContractedThievesUiController : MonoBehaviour
         }
 
         EventManager.Instance.OnCharacterBuffSelected += EnableShowHide;
+        EventManager.Instance.OnThiefHired += HandleOnThiefHired;
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.Instance.OnCharacterBuffSelected -= EnableShowHide;
+        EventManager.Instance.OnThiefHired -= HandleOnThiefHired;
     }
 
     private void ShowHidePanel()
@@ -58,5 +67,13 @@ public class ContractedThievesUiController : MonoBehaviour
         {
             showHideButton.gameObject.SetActive(true);
         }
+    }
+
+    private void HandleOnThiefHired(ThiefData thiefData)
+    {
+        GameObject newThiefDataUI = Instantiate(ThiefDataPrefab.gameObject, thiefDataParent);
+        ThiefInfoPanelAssigner instantiatedThiefPanelAssigner = newThiefDataUI.GetComponent<ThiefInfoPanelAssigner>();
+        
+        instantiatedThiefPanelAssigner?.SetupUI(thiefData);
     }
 }
