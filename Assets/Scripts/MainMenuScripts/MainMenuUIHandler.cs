@@ -3,21 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainMenuUIHandler : MonoBehaviour
 {
     [Header("All Main menu button references")] 
     [SerializeField] private Button playButton;
-    [SerializeField] private Button optionsButton;
     [SerializeField] private Button exitButton;
-    [SerializeField] private Button audioSettingsButton;
     [SerializeField] private Button creditsButton;
     
 
     [Header("All UI Panel references")] 
     [SerializeField] private GameObject mainButtonsPanel;
-    [SerializeField] private GameObject optionsButtonsPanel;
-    [SerializeField] private GameObject audioButtonsPanel;
     [SerializeField] private GameObject creditsButtonsPanel;
 
     private void Start()
@@ -25,16 +22,7 @@ public class MainMenuUIHandler : MonoBehaviour
         if (playButton != null)
         {
             //Scene transition
-        }
-
-        if (optionsButton != null)
-        {
-            optionsButton.onClick.AddListener(OpenOptionsPanel);
-        }
-
-        if (audioSettingsButton != null)
-        {
-            audioSettingsButton.onClick.AddListener(OpenAudioSettingsPanel);
+            playButton.onClick.AddListener(LoadNextScene);
         }
 
         if (creditsButton != null)
@@ -48,35 +36,32 @@ public class MainMenuUIHandler : MonoBehaviour
         }
     }
 
+    public void LoadNextScene()
+    {
+        // Get the current active scene's build index
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        // Load the next scene in the build order
+        SceneManager.LoadScene(currentSceneIndex + 1);
+    }
+    
     public void OpenOptionsPanel()
     {
         mainButtonsPanel?.SetActive(false);
-        audioButtonsPanel?.SetActive(false);
         creditsButtonsPanel?.SetActive(false);
-        
-        optionsButtonsPanel?.SetActive(true);
     }
 
     public void OpenMainButtonsPanel()
     {
-        optionsButtonsPanel?.SetActive(false);
-        audioButtonsPanel?.SetActive(false);
         creditsButtonsPanel?.SetActive(false);
         
         mainButtonsPanel?.SetActive(true);
     }
 
-    private void OpenAudioSettingsPanel()
-    {
-        optionsButtonsPanel?.SetActive(false);
-        
-        audioButtonsPanel?.SetActive(true);
-    }
 
     private void OpenCreditsPanel()
     {
-        optionsButtonsPanel?.SetActive(false);
-        
+        mainButtonsPanel?.SetActive(false);
         creditsButtonsPanel?.SetActive(true);
     }
     
