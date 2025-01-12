@@ -21,7 +21,7 @@ public class JobInfoAssigner : MonoBehaviour
     {
         removeJobButton.onClick.AddListener(CallRemove);
     }
-
+    
     private void CallRemove()
     {
         GameManager.Instance.jobInfoGenerator.RemoveJob(this);
