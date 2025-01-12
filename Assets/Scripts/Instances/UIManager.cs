@@ -28,11 +28,13 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         EventManager.Instance.OnCharacterBuffSelected += EnableMoneyCanvas;
+        // EventManager.Instance.OnMoneyChanged += HandleOnMoneyChanged;
     }
 
     private void OnDestroy()
     {
         EventManager.Instance.OnCharacterBuffSelected -= EnableMoneyCanvas;
+        // EventManager.Instance.OnMoneyChanged -= HandleOnMoneyChanged;
     }
 
     public void NotEnoughFundsMessage()

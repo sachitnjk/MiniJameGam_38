@@ -27,16 +27,34 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.FundsCanvas.SetActive(false);
     }
 
+    private void Start()
+    {
+        EventManager.Instance.OnJobCompleted += HandleMoneyOnJobCompleted;
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.Instance.OnJobCompleted -= HandleMoneyOnJobCompleted;
+    }
+
+    private void HandleMoneyOnJobCompleted(JobInfo jobInfo)
+    {
+        AddMoney(jobInfo.payoutAmount);
+        
+    }
+    
     public void AddMoney(int amount)
     {
         CurrentMoney += amount;
         UIManager.Instance.HandleOnMoneyChanged(CurrentMoney);
+        EventManager.Instance.InvokeOnMoneyChanged(CurrentMoney);
     }
 
     public void WithdrawMoney(int amount)
     {
         CurrentMoney -= amount;
         UIManager.Instance.HandleOnMoneyChanged(CurrentMoney);
+        EventManager.Instance.InvokeOnMoneyChanged(CurrentMoney);
     }
 
     public void AddToHiredThiefList(ThiefData thiefData)

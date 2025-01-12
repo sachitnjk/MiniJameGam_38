@@ -19,7 +19,28 @@ public class JobInfoAssigner : MonoBehaviour
 
     private void Start()
     {
+        assignJobButton.onClick.AddListener(AssignJob);
         removeJobButton.onClick.AddListener(CallRemove);
+    }
+
+    private void AssignJob()
+    {
+        List<ThiefData> eligibleThieves = new List<ThiefData>();
+
+        foreach (ThiefData thief in GameManager.Instance.HiredThieves)
+        {
+            if (thief.Tier >= currentJobInfo.requiredTier)
+            {
+                eligibleThieves.Add(thief);
+            }
+        }
+        
+        int randomIndex = UnityEngine.Random.Range(0, eligibleThieves.Count);
+        ThiefData AssignedThief = eligibleThieves[randomIndex];
+        
+        EventManager.Instance.InvokeOnThiefAssigned(AssignedThief, currentJobInfo);
+        
+        CallRemove();
     }
     
     private void CallRemove()
@@ -41,7 +62,7 @@ public class JobInfoAssigner : MonoBehaviour
     {
         locationSprite.sprite = currentJobInfo.locationSprite;
         locationText.text = currentJobInfo.location;
-        maxThievesText.text = currentJobInfo.maxThieves.ToString();
+        maxThievesText.text = currentJobInfo.payoutAmount.ToString();
         requiredTierText.text = currentJobInfo.requiredTier.ToString();
     }
     
@@ -53,13 +74,13 @@ public class JobInfo
 {
     public Sprite locationSprite;
     public string location;
-    public int maxThieves;
+    public int payoutAmount;
     public ThiefTiers requiredTier;
     
-    public JobInfo(Sprite locationSprite, string Location, int MaxThieves, ThiefTiers RequiredTier)
+    public JobInfo(Sprite locationSprite, string Location, int PayoutAmount, ThiefTiers RequiredTier)
     {
         this.location = Location;
-        this.maxThieves = MaxThieves;
+        this.payoutAmount = PayoutAmount;
         this.requiredTier = RequiredTier;
     }
 }

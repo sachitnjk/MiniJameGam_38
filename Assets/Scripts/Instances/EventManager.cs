@@ -10,7 +10,9 @@ public class EventManager : MonoBehaviour
     public Action<int> OnCharacterVisualSelected;
     public Action<CharacterPassiveBuff> OnCharacterBuffSelected;
     public Action<ThiefData> OnThiefHired;
-    // public Action<int> OnMoneyChanged;
+    public Action<ThiefData, JobInfo> OnThiefAssigned;
+    public Action<JobInfo> OnJobCompleted;
+    public Action<int> OnMoneyChanged;
     
     private void Awake()
     {
@@ -41,10 +43,20 @@ public class EventManager : MonoBehaviour
         OnThiefHired?.Invoke(thief);
     }
 
-    // public void InvokeOnMoneyChanged(int money)
-    // {
-    //     OnMoneyChanged?.Invoke(money);
-    // }
+    public void InvokeOnThiefAssigned(ThiefData thief, JobInfo jobInfo)
+    {
+        OnThiefAssigned?.Invoke(thief, jobInfo);
+    }
+
+    public void InvokeOnJobCompleted(JobInfo jobInfo)
+    {
+        OnJobCompleted?.Invoke(jobInfo);
+    }
+
+    public void InvokeOnMoneyChanged(int money)
+    {
+        OnMoneyChanged?.Invoke(money);
+    }
     
     #endregion
     

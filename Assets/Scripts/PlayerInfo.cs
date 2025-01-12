@@ -41,14 +41,14 @@ public class PlayerInfo : MonoBehaviour
 
         EventManager.Instance.OnCharacterVisualSelected += HandleOnCharacterVisualSelected;
         EventManager.Instance.OnCharacterBuffSelected += HandleOnCharacterBuffSelected;
-        // EventManager.Instance?.OnMoneyChange += HandleOnMoneyChange;
+        EventManager.Instance.OnMoneyChanged += HandleOnMoneyChange;
     }
 
     private void OnDestroy()
     {
         EventManager.Instance.OnCharacterVisualSelected -= HandleOnCharacterVisualSelected;
         EventManager.Instance.OnCharacterBuffSelected -= HandleOnCharacterBuffSelected;
-        // EventManager.Instance?.OnMoneyChange += HandleOnMoneyChange;
+        EventManager.Instance.OnMoneyChanged -= HandleOnMoneyChange;
     }
 
     #region Event Handlers
@@ -85,26 +85,26 @@ public class PlayerInfo : MonoBehaviour
         selectedCharacterPassiveBuff = characterPassiveBuff;
     }
     
-    private void HandleOnMoneyChange()
+    private void HandleOnMoneyChange(int value)
     {
-        LevelChangeCheck();
+        LevelChangeCheck(value);
     }
     
     #endregion
 
     #region Helpers
 
-    private void LevelChangeCheck()
+    private void LevelChangeCheck(int value)
     {
-        if (GameManager.Instance.CurrentMoney >= 400000)
+        if (value >= 400000)
         {
             currentLevel = 4;
         }
-        else if (GameManager.Instance.CurrentMoney >= 200000)
+        else if (value >= 200000)
         {
             currentLevel = 3;
         }
-        else if (GameManager.Instance.CurrentMoney >= 100000)
+        else if (value >= 100000)
         {
             currentLevel = 2;
         }

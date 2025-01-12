@@ -7,6 +7,10 @@ using UnityEngine.UI;
 public class OngoingJobsPanel : MonoBehaviour
 {
     [SerializeField] private Button showHideButton;
+    [SerializeField] private RectTransform OngoingJobPrefab;
+    [SerializeField] private Transform prefabParent;
+    
+    private List<GameObject> ongoingJobs = new List<GameObject>();
     
     private Animator OngoingJobsPanelAnimator;
     private bool isVisible = false;
@@ -16,6 +20,13 @@ public class OngoingJobsPanel : MonoBehaviour
         showHideButton.onClick.AddListener(ShowHide);
         
         OngoingJobsPanelAnimator = gameObject.GetComponent<Animator>();
+
+        EventManager.Instance.OnThiefAssigned += HandleOnJobAssigned;
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.Instance.OnThiefAssigned -= HandleOnJobAssigned;
     }
 
     private void ShowHide()
@@ -33,8 +44,13 @@ public class OngoingJobsPanel : MonoBehaviour
         OngoingJobsPanelAnimator?.SetBool("isVisible", isVisible);
     }
 
-    // private void HandleOnJobAssigned()
-    // {
-    //     
-    // }
+    private void HandleOnJobAssigned(ThiefData thiefData, JobInfo jobInfo)
+    {
+        GameObject newOngoingJob = Instantiate(OngoingJobPrefab.gameObject, prefabParent);
+        InProgressJob job = newOngoingJob.GetComponent<InProgressJob>();
+        
+        job?.SetupInfo(thiefData, jobInfo);
+        
+        ongoingJobs.Add(newOngoingJob);
+    }
 }
