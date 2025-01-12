@@ -1,13 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ThiefInfoPanelAssigner : MonoBehaviour
+public class ThiefAppearanceHandler : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI nameText;
-    [SerializeField] private TextMeshProUGUI tierText;
     [SerializeField] private Image headAppearance;
     [SerializeField] private Image bodyAppearance;
     
@@ -15,15 +12,12 @@ public class ThiefInfoPanelAssigner : MonoBehaviour
     [SerializeField] private Sprite MinionBody;
     [SerializeField] private Sprite BruteBody;
     [SerializeField] private Sprite ProfessionalBody;
-
-    public void SetupUI(ThiefData thiefData)
-    {
-        headAppearance.sprite = thiefData.ThiefHeadAppearance;
-        nameText.text = thiefData.Name;
-        tierText.text = thiefData.Tier.ToString();
-        SetTier(thiefData.Tier);
-    }
     
+    public void SetHeadSprite(Sprite headSprite)
+    {
+        headAppearance.sprite = headSprite;
+    }
+
     public void SetTier(ThiefTiers tier)
     {
         switch (tier)

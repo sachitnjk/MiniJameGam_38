@@ -9,7 +9,7 @@ public class ThiefHirer : MonoBehaviour
 {
     public ThiefData currentHireThiefInfo;
     
-    [SerializeField] private Sprite AppearanceHead;
+    [SerializeField] private ThiefAppearanceHandler appearanceHandler;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI tierText;
     [SerializeField] private TextMeshProUGUI costText;
@@ -41,10 +41,12 @@ public class ThiefHirer : MonoBehaviour
         
         if (currentHireThiefInfo != null)
         {
-            AppearanceHead = newThiefInfo.ThiefHeadAppearance;
+            appearanceHandler.SetHeadSprite(newThiefInfo.ThiefHeadAppearance);
             nameText.text = newThiefInfo.Name;
             tierText.text = newThiefInfo.Tier.ToString();
+            appearanceHandler.SetTier(newThiefInfo.Tier);
             costText.text = newThiefInfo.cost.ToString();
         }
     }
 }
+
