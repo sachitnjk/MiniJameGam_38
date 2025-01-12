@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     [field: SerializeField] public JobInfoGenerator jobInfoGenerator { get; private set; }
+    [field: SerializeField] public ThiefInfoGenerator thiefInfoGenerator { get; private set; }
     public int CurrentMoney { get; private set; }
 
     public List<ThiefData> HiredThieves { get; private set; } = new List<ThiefData>();
@@ -22,18 +23,8 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         
-        AddMoney(500);
+        AddMoney(1000);
         UIManager.Instance.FundsCanvas.SetActive(false);
-    }
-
-    private void Start()
-    {
-        EventManager.Instance.OnThiefHired += HandleOnThiefHired;
-    }
-
-    private void OnDestroy()
-    {
-        EventManager.Instance.OnThiefHired -= HandleOnThiefHired;
     }
 
     public void AddMoney(int amount)
@@ -48,8 +39,8 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.HandleOnMoneyChanged(CurrentMoney);
     }
 
-    private void HandleOnThiefHired(ThiefData thiefData)
+    public void AddToHiredThiefList(ThiefData thiefData)
     {
-        
+        HiredThieves.Add(thiefData);
     }
 }

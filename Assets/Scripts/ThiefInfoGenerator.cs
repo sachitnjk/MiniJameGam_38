@@ -16,8 +16,19 @@ public class ThiefInfoGenerator : MonoBehaviour
     
     private int maxThievesToGenerate = 15;
 
+    private void Start()
+    {
+        EventManager.Instance.OnThiefHired += HandleOnThiefHired;
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.Instance.OnThiefHired -= HandleOnThiefHired;
+    }
+
     public void GenerateThiefHireInfo()
     {
+        generatedHires.Clear();
         
         int generatedThieves = Random.Range(5, maxThievesToGenerate);
         // int generatedThieves = 4;
@@ -107,7 +118,22 @@ public class ThiefInfoGenerator : MonoBehaviour
         if (newThiefHirerInfo != null)
         {
             newThiefHirerInfo.SetThiefData(newThiefData);
+            GameManager.Instance.AddToHiredThiefList(newThiefData);
             ThiefHireInfoList.Add(newThiefHirerInfo.gameObject);
+        }
+    }
+
+    private void HandleOnThiefHired(ThiefData newThiefData)
+    {
+        foreach (GameObject newThiefInfo in ThiefHireInfoList)
+        {
+            ThiefHirer thiefHirerComponent = newThiefInfo.GetComponent<ThiefHirer>();
+            if (thiefHirerComponent != null && thiefHirerComponent.currentHireThiefInfo == newThiefData)
+            {
+                ThiefHireInfoList.Remove(newThiefInfo);
+                Destroy(newThiefInfo);
+                break;
+            }
         }
     }
 }
