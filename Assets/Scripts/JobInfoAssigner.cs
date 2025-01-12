@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,12 +7,25 @@ using UnityEngine.UI;
 
 public class JobInfoAssigner : MonoBehaviour
 {
-    private JobInfo currentJobInfo;
+    public JobInfo currentJobInfo { get; private set; }
 
     [SerializeField] private Image locationSprite;
     [SerializeField] private TextMeshProUGUI locationText;
     [SerializeField] private TextMeshProUGUI maxThievesText;
     [SerializeField] private TextMeshProUGUI requiredTierText;
+    
+    [SerializeField] private Button assignJobButton;
+    [SerializeField] private Button removeJobButton;
+
+    private void Start()
+    {
+        removeJobButton.onClick.AddListener(CallRemove);
+    }
+
+    private void CallRemove()
+    {
+        GameManager.Instance.jobInfoGenerator.RemoveJob(this);
+    }
     
     public void SetJobInfo(JobInfo jobInfo)
     {

@@ -9,6 +9,7 @@ public class EventManager : MonoBehaviour
 
     public Action<int> OnCharacterVisualSelected;
     public Action<CharacterPassiveBuff> OnCharacterBuffSelected;
+    public Action<ThiefData> OnThiefHired;
     
     private void Awake()
     {
@@ -32,6 +33,11 @@ public class EventManager : MonoBehaviour
     public void InvokeOnCharacterBuffSelected(CharacterPassiveBuff buff)
     {
         OnCharacterBuffSelected?.Invoke(buff);
+    }
+
+    public void InvokeOnThiefHired(ThiefData thief)
+    {
+        OnThiefHired?.Invoke(thief);
     }
     
     #endregion

@@ -11,6 +11,7 @@ public class JobInfoGenerator : MonoBehaviour
     [SerializeField] private Transform jobInfoUIParent;
     
     private List<JobInfo> generatedJobs = new List<JobInfo>();
+    private List<GameObject> jobInfoAssignersList = new List<GameObject>();
 
     private int currentNumberOfJobsGenerated = 0;
     private int maxJobsToGenerate = 15;
@@ -29,12 +30,25 @@ public class JobInfoGenerator : MonoBehaviour
             JobInfo newJobInfo = new JobInfo(
                 GetRandomJobBoard(), 
                 GetRandomJobLocation(), 
-                GetRandomMaxThievesNumber(),
+                GetRandomMaxPayoutAmount(),
                 GetRandomThiefTier());
             
             generatedJobs.Add(newJobInfo);
             
             AddNewJobToUI(newJobInfo);
+        }
+    }
+
+    public void RemoveJob(JobInfoAssigner jobInfoAssigner)
+    {
+        foreach (GameObject jobInfoAssignerGO in jobInfoAssignersList)
+        {
+            if (jobInfoAssigner.GetComponent<JobInfoAssigner>().currentJobInfo == jobInfoAssigner.currentJobInfo)
+            {
+                jobInfoAssignersList.Remove(jobInfoAssigner.gameObject);
+                Destroy(jobInfoAssigner.gameObject);
+                break;
+            }
         }
     }
 
@@ -46,6 +60,7 @@ public class JobInfoGenerator : MonoBehaviour
         if (newJobInfoAssigner != null)
         {
             newJobInfoAssigner.SetJobInfo(newJobInfo);
+            jobInfoAssignersList.Add(newJobInfoAssigner.gameObject);
         }
     }
 
@@ -67,9 +82,10 @@ public class JobInfoGenerator : MonoBehaviour
         return randomJobLocation;
     }
 
-    private int GetRandomMaxThievesNumber()
+    private int GetRandomMaxPayoutAmount()
     {
-        return 3;
+        int maxPayoutAmount = Random.Range(5, 500);
+        return maxPayoutAmount;
     }
     
     private ThiefTiers GetRandomThiefTier()

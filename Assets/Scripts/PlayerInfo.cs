@@ -10,7 +10,6 @@ public class PlayerInfo : MonoBehaviour
     [Header("Debug")] 
     [Range(1f, 4f)]
     [SerializeField] private int startingLevel;
-    [SerializeField] private int startingMoney;
     [SerializeField] private int startingHatTier;
     [SerializeField] private List<ThiefData> startingThievesUnderContract = new List<ThiefData>();
     
@@ -29,7 +28,7 @@ public class PlayerInfo : MonoBehaviour
     private int currentHatTier;
     
     private int currentLevel;
-    private int currentMoney;
+    // private int currentMoney;
 
     private List<ThiefData> thievesUnderContract = new List<ThiefData>();
 
@@ -86,18 +85,8 @@ public class PlayerInfo : MonoBehaviour
         selectedCharacterPassiveBuff = characterPassiveBuff;
     }
     
-    private void HandleOnMoneyChange(bool moneyAdded, int amount)
+    private void HandleOnMoneyChange()
     {
-        if (moneyAdded)
-        {
-            currentMoney += amount;
-        }
-        else
-        {
-            currentMoney -= amount;
-        }
-        currentMoney = Mathf.Clamp(currentMoney, 0, 1000000);
-        
         LevelChangeCheck();
     }
     
@@ -107,15 +96,15 @@ public class PlayerInfo : MonoBehaviour
 
     private void LevelChangeCheck()
     {
-        if (currentMoney >= 400000)
+        if (GameManager.Instance.CurrentMoney >= 400000)
         {
             currentLevel = 4;
         }
-        else if (currentMoney >= 200000)
+        else if (GameManager.Instance.CurrentMoney >= 200000)
         {
             currentLevel = 3;
         }
-        else if (currentMoney >= 100000)
+        else if (GameManager.Instance.CurrentMoney >= 100000)
         {
             currentLevel = 2;
         }
@@ -133,29 +122,25 @@ public class PlayerInfo : MonoBehaviour
         {
             case 1:
                 currentHatTier = 1;
-                //EventManager.Instance?.InvokeOnHatChange;
                 break;
             case 2:
                 currentHatTier = 2;
-                //EventManager.Instance?.InvokeOnHatChange;
                 break;
             case 3:
                 currentHatTier = 3;
-                //EventManager.Instance?.InvokeOnHatChange;
                 break;
             case 4:
                 currentHatTier = 4;
-                //EventManager.Instance?.InvokeOnHatChange;
                 break;
             case 5:
                 currentHatTier = 5;
-                //EventManager.Instance?.InvokeOnHatChange;
                 break;
             case 6:
                 currentHatTier = 6;
-                //EventManager.Instance?.InvokeOnHatChange;
                 break;
         }
+        
+        // EventManager.Instance.InvokeOnHatChange(currentHatTier);
     }
 
     private void AddThievesUnderContract(ThiefData thiefData)
@@ -168,11 +153,18 @@ public class PlayerInfo : MonoBehaviour
 }
 
 [System.Serializable]
-public struct ThiefData
+public class ThiefData
 {
     public Sprite ThiefHeadAppearance;
     public string Name;
     public ThiefTiers Tier;
-    public int Experience;
-    public int Loyalty;
+    public int cost;
+
+    public ThiefData(Sprite thiefHeadAppearance, string name, ThiefTiers tier, int cost)
+    {
+        this.ThiefHeadAppearance = thiefHeadAppearance;
+        this.Name = name;
+        this.Tier = tier;
+        this.cost = cost;
+    }
 }
