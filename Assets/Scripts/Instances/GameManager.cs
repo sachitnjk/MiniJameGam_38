@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     [field: SerializeField] public JobInfoGenerator jobInfoGenerator { get; private set; }
     [field: SerializeField] public ThiefInfoGenerator thiefInfoGenerator { get; private set; }
+    
+    [SerializeField] private PlayerInfo playerInfo;
     public int CurrentMoney { get; private set; }
 
     public List<ThiefData> HiredThieves { get; private set; } = new List<ThiefData>();
@@ -23,7 +25,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         
-        AddMoney(1000);
+        AddMoney(20000);
         UIManager.Instance.FundsCanvas.SetActive(false);
     }
 
@@ -37,7 +39,7 @@ public class GameManager : MonoBehaviour
         EventManager.Instance.OnJobCompleted -= HandleMoneyOnJobCompleted;
     }
 
-    private void HandleMoneyOnJobCompleted(JobInfo jobInfo)
+    private void HandleMoneyOnJobCompleted(JobInfo jobInfo, ThiefData thiefData)
     {
         AddMoney(jobInfo.payoutAmount);
         
@@ -47,7 +49,8 @@ public class GameManager : MonoBehaviour
     {
         CurrentMoney += amount;
         UIManager.Instance.HandleOnMoneyChanged(CurrentMoney);
-        EventManager.Instance.InvokeOnMoneyChanged(CurrentMoney);
+        playerInfo.HandleOnMoneyChange(CurrentMoney);
+        // EventManager.Instance.InvokeOnMoneyChanged(CurrentMoney);
     }
 
     public void WithdrawMoney(int amount)

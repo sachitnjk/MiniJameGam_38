@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
 
 public class PlayerInfo : MonoBehaviour
@@ -16,6 +17,13 @@ public class PlayerInfo : MonoBehaviour
     [Header("References")]
     [SerializeField] private SpriteRenderer characterSpriteRenderer;
     [SerializeField] private List<GameObject> allLevelHats = new List<GameObject>();
+    
+    [SerializeField] private GameObject hat_1;
+    [SerializeField] private GameObject hat_2;
+    [SerializeField] private GameObject hat_3;
+    [SerializeField] private GameObject hat_4;
+    [SerializeField] private GameObject hat_5;
+    [SerializeField] private GameObject hat_6;
 
     [SerializeField] private GameObject TigerBossVisual;
     [SerializeField] private GameObject BearBossVisual;
@@ -57,8 +65,6 @@ public class PlayerInfo : MonoBehaviour
     {
         TigerBossVisual?.SetActive(false);
         BearBossVisual?.SetActive(false);
-        XBossVisual?.SetActive(false);
-        YBossVisual?.SetActive(false);
         
         switch (characterSpriteInt)
         {
@@ -85,7 +91,7 @@ public class PlayerInfo : MonoBehaviour
         selectedCharacterPassiveBuff = characterPassiveBuff;
     }
     
-    private void HandleOnMoneyChange(int value)
+    public void HandleOnMoneyChange(int value)
     {
         LevelChangeCheck(value);
     }
@@ -96,15 +102,28 @@ public class PlayerInfo : MonoBehaviour
 
     private void LevelChangeCheck(int value)
     {
-        if (value >= 400000)
+        if (value > 50000)
+        {
+            LoadNextScene();
+        }
+        
+        if (value >= 35000)
+        {
+            currentLevel = 6;
+        }
+        else if (value >= 30000)
+        {
+            currentLevel = 5;
+        }
+        else if (value >= 25000)
         {
             currentLevel = 4;
         }
-        else if (value >= 200000)
+        else if (value >= 20000)
         {
             currentLevel = 3;
         }
-        else if (value >= 100000)
+        else if(value >= 15000)
         {
             currentLevel = 2;
         }
@@ -113,34 +132,58 @@ public class PlayerInfo : MonoBehaviour
             currentLevel = 1;
         }
         
+        UIManager.Instance.UpdateLevelUI(currentLevel);
+        
         HatChangeCheck();
     }
 
+    public void LoadNextScene()
+    {
+        // Get the current active scene's build index
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        // Load the next scene in the build order
+        SceneManager.LoadScene(currentSceneIndex + 1);
+    }
+    
     private void HatChangeCheck()
     {
+        hat_1.gameObject.SetActive(false);
+        hat_2.gameObject.SetActive(false);
+        hat_3.gameObject.SetActive(false);
+        hat_4.gameObject.SetActive(false);
+        hat_5.gameObject.SetActive(false);
+        hat_6.gameObject.SetActive(false);
+        
+        
         switch (currentLevel)
         {
             case 1:
                 currentHatTier = 1;
+                hat_1.gameObject.SetActive(true);
                 break;
             case 2:
                 currentHatTier = 2;
+                hat_2.gameObject.SetActive(true);
                 break;
             case 3:
                 currentHatTier = 3;
+                hat_3.gameObject.SetActive(true);
                 break;
             case 4:
                 currentHatTier = 4;
+                hat_4.gameObject.SetActive(true);
                 break;
             case 5:
                 currentHatTier = 5;
+                hat_5.gameObject.SetActive(true);
                 break;
             case 6:
                 currentHatTier = 6;
+                hat_6.gameObject.SetActive(true);
+                // GameManager.Instance.TriggerEnd();
                 break;
         }
-        
-        // EventManager.Instance.InvokeOnHatChange(currentHatTier);
     }
 
     private void AddThievesUnderContract(ThiefData thiefData)

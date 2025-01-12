@@ -16,6 +16,7 @@ public class InProgressJob : MonoBehaviour
     
     private int payoutAmount;
     private JobInfo currentJobInfo;
+    private ThiefData currentThief;
     
     private int CalculateCompletionLimit(ThiefTiers tier)
     {
@@ -43,6 +44,7 @@ public class InProgressJob : MonoBehaviour
     public void SetupInfo(ThiefData thiefData, JobInfo jobInfo)
     {
         currentJobInfo = jobInfo;
+        currentThief = thiefData;
         
         thiefHeadAppearance.sprite = thiefData.ThiefHeadAppearance;
         name.text = thiefData.Name;
@@ -66,7 +68,7 @@ public class InProgressJob : MonoBehaviour
             yield return null;
         }
 
-        EventManager.Instance.InvokeOnJobCompleted(currentJobInfo);
+        EventManager.Instance.InvokeOnJobCompleted(currentJobInfo, currentThief);
         
         Destroy(gameObject);
     }

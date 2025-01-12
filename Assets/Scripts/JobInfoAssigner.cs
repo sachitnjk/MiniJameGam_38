@@ -16,11 +16,20 @@ public class JobInfoAssigner : MonoBehaviour
     
     [SerializeField] private Button assignJobButton;
     [SerializeField] private Button removeJobButton;
+    
+    private List<ThiefData> assignedThieves = new List<ThiefData>();
 
     private void Start()
     {
         assignJobButton.onClick.AddListener(AssignJob);
         removeJobButton.onClick.AddListener(CallRemove);
+
+        EventManager.Instance.OnJobCompleted -= HandleOnJobCompleted;
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.Instance.OnJobCompleted -= HandleOnJobCompleted;
     }
 
     private void AssignJob()
@@ -29,7 +38,7 @@ public class JobInfoAssigner : MonoBehaviour
 
         foreach (ThiefData thief in GameManager.Instance.HiredThieves)
         {
-            if (thief.Tier >= currentJobInfo.requiredTier)
+            if (thief.Tier >= currentJobInfo.requiredTier && !assignedThieves.Contains(thief))
             {
                 eligibleThieves.Add(thief);
             }
@@ -39,6 +48,8 @@ public class JobInfoAssigner : MonoBehaviour
         {
             int randomIndex = UnityEngine.Random.Range(0, eligibleThieves.Count);
             ThiefData AssignedThief = eligibleThieves[randomIndex];
+            
+            assignedThieves.Add(AssignedThief);
             
             EventManager.Instance.InvokeOnThiefAssigned(AssignedThief, currentJobInfo);
             CallRemove();
@@ -67,7 +78,17 @@ public class JobInfoAssigner : MonoBehaviour
         maxThievesText.text = currentJobInfo.payoutAmount.ToString();
         requiredTierText.text = currentJobInfo.requiredTier.ToString();
     }
-    
+
+    public void HandleOnJobCompleted(JobInfo jobInfo, ThiefData thiefData)
+    {
+        foreach (ThiefData assignedThief in assignedThieves)
+        {
+            if (assignedThief == thiefData)
+            {
+                assignedThieves.Remove(assignedThief);
+            }
+        }
+    }
     
 }
 
