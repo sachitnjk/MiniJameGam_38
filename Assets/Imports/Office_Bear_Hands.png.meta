@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 685114666c8e74642822b83d5e62258e
+guid: 5035528e2a2d7094b941fe7bb5edad61
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Office_Tiger_0
+      name: Office_Bear_Hands_0
       rect:
         serializedVersion: 2
-        x: 138
-        y: 425
-        width: 138
-        height: 157
+        x: 99
+        y: 408
+        width: 202
+        height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb24fafb4390db84c87e1f3bbd7fcee8
-      internalID: 1963852063
+      spriteID: c09dcfd4c63f4634b84737f81fda14bd
+      internalID: 1583562766
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Office_Tiger_1
+      name: Office_Bear_Hands_1
       rect:
         serializedVersion: 2
-        x: 534
-        y: 415
-        width: 138
-        height: 157
+        x: 499
+        y: 408
+        width: 202
+        height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b70bb706d33e1ec448ccd82117dbcd6a
-      internalID: -100750857
+      spriteID: 8d73a02086b0dc449a434b96ba65ca67
+      internalID: 1731136910
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Office_Tiger_2
+      name: Office_Bear_Hands_2
       rect:
         serializedVersion: 2
-        x: 128
-        y: 216
-        width: 138
-        height: 157
+        x: 100
+        y: 207
+        width: 200
+        height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,20 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50ec1265b4888634fb45347c72159f2b
-      internalID: 843402558
+      spriteID: 09b76c3e181469c43a1236bbaaf027d5
+      internalID: 795601676
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Office_Tiger_3
+      name: Office_Bear_Hands_3
       rect:
         serializedVersion: 2
-        x: 534
-        y: 216
-        width: 138
-        height: 157
+        x: 499
+        y: 208
+        width: 202
+        height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,20 +200,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ffe5d52a8200d86419505110fa4eeb94
-      internalID: 1538349977
+      spriteID: f89cf9d453a51ff4ca1dce7e85d78c1a
+      internalID: 385766642
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Office_Tiger_4
+      name: Office_Bear_Hands_4
       rect:
         serializedVersion: 2
-        x: 129
-        y: 18
-        width: 138
-        height: 157
+        x: 99
+        y: 8
+        width: 202
+        height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,29 +221,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 11791b133a12a8c498671e9d2a2fae39
-      internalID: 562817409
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Office_Tiger_5
-      rect:
-        serializedVersion: 2
-        x: 534
-        y: 17
-        width: 138
-        height: 157
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 80fa88d85a8808643a9989014e081212
-      internalID: -2053185754
+      spriteID: a03d212fd3486934ebc13e1053471eb2
+      internalID: -1785719652
       vertices: []
       indices: 
       edges: []
@@ -251,7 +230,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: df14d3161b55b7c4cb4b78f5785a573b
     internalID: 0
     vertices: []
     indices: 
@@ -259,12 +238,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Office_Tiger_0: 1963852063
-      Office_Tiger_1: -100750857
-      Office_Tiger_2: 843402558
-      Office_Tiger_3: 1538349977
-      Office_Tiger_4: 562817409
-      Office_Tiger_5: -2053185754
+      Office_Bear_Hands_0: 1583562766
+      Office_Bear_Hands_1: 1731136910
+      Office_Bear_Hands_2: 795601676
+      Office_Bear_Hands_3: 385766642
+      Office_Bear_Hands_4: -1785719652
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
