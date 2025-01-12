@@ -34,13 +34,15 @@ public class JobInfoAssigner : MonoBehaviour
                 eligibleThieves.Add(thief);
             }
         }
-        
-        int randomIndex = UnityEngine.Random.Range(0, eligibleThieves.Count);
-        ThiefData AssignedThief = eligibleThieves[randomIndex];
-        
-        EventManager.Instance.InvokeOnThiefAssigned(AssignedThief, currentJobInfo);
-        
-        CallRemove();
+
+        if (eligibleThieves.Count != 0)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, eligibleThieves.Count);
+            ThiefData AssignedThief = eligibleThieves[randomIndex];
+            
+            EventManager.Instance.InvokeOnThiefAssigned(AssignedThief, currentJobInfo);
+            CallRemove();
+        }
     }
     
     private void CallRemove()

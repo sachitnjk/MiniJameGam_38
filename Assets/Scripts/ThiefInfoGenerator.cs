@@ -118,7 +118,6 @@ public class ThiefInfoGenerator : MonoBehaviour
         if (newThiefHirerInfo != null)
         {
             newThiefHirerInfo.SetThiefData(newThiefData);
-            GameManager.Instance.AddToHiredThiefList(newThiefData);
             ThiefHireInfoList.Add(newThiefHirerInfo.gameObject);
         }
     }
@@ -130,6 +129,7 @@ public class ThiefInfoGenerator : MonoBehaviour
             ThiefHirer thiefHirerComponent = newThiefInfo.GetComponent<ThiefHirer>();
             if (thiefHirerComponent != null && thiefHirerComponent.currentHireThiefInfo == newThiefData)
             {
+                GameManager.Instance.AddToHiredThiefList(newThiefData);
                 ThiefHireInfoList.Remove(newThiefInfo);
                 Destroy(newThiefInfo);
                 break;
