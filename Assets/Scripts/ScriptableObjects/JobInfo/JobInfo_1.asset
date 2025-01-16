@@ -22,8 +22,6 @@ MonoBehaviour:
   - Fancy Hotel
   - Castle
   jobBoards:
-  - {fileID: 21300000, guid: e13a856ba7fad2440a6d3a562d72db23, type: 3}
-  - {fileID: 21300000, guid: e13a856ba7fad2440a6d3a562d72db23, type: 3}
-  - {fileID: 21300000, guid: e13a856ba7fad2440a6d3a562d72db23, type: 3}
-  - {fileID: 21300000, guid: e13a856ba7fad2440a6d3a562d72db23, type: 3}
+  - {fileID: 21300000, guid: 8633ede9ddf8a67479c35431466ce0f3, type: 3}
+  - {fileID: 21300000, guid: 0c1955c37b2685c49be80a55b7dded1a, type: 3}
   - {fileID: 21300000, guid: e13a856ba7fad2440a6d3a562d72db23, type: 3}

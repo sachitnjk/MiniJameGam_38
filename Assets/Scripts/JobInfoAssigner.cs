@@ -102,6 +102,7 @@ public class JobInfo
     
     public JobInfo(Sprite locationSprite, string Location, int PayoutAmount, ThiefTiers RequiredTier)
     {
+        this.locationSprite = locationSprite;
         this.location = Location;
         this.payoutAmount = PayoutAmount;
         this.requiredTier = RequiredTier;
