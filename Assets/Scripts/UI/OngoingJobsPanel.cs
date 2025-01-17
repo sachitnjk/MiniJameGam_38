@@ -17,7 +17,7 @@ public class OngoingJobsPanel : MonoBehaviour
 
     private void Start()
     {
-        showHideButton.onClick.AddListener(ShowHide);
+        // showHideButton.onClick.AddListener(ShowHide);
         
         OngoingJobsPanelAnimator = gameObject.GetComponent<Animator>();
 
@@ -40,6 +40,7 @@ public class OngoingJobsPanel : MonoBehaviour
             isVisible = false;
         }
         
+        
         //Trigger animation with same bool
         OngoingJobsPanelAnimator?.SetBool("isVisible", isVisible);
     }
@@ -52,5 +53,22 @@ public class OngoingJobsPanel : MonoBehaviour
         job?.SetupInfo(thiefData, jobInfo);
         
         ongoingJobs.Add(newOngoingJob);
+    }
+
+    public void TriggerPanelShow()
+    {
+        if (OngoingJobsPanelAnimator.GetBool("isVisible"))
+        {
+            TriggerPanelHide();
+        }
+        else
+        {
+            OngoingJobsPanelAnimator?.SetBool("isVisible", true);
+        }
+    }
+    
+    public void TriggerPanelHide()
+    {
+        OngoingJobsPanelAnimator?.SetBool("isVisible", false);
     }
 }

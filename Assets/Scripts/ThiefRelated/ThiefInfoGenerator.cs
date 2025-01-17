@@ -12,7 +12,7 @@ public class ThiefInfoGenerator : MonoBehaviour
     [SerializeField] private Transform thiefInfoParent;
     
     private List<ThiefData> generatedHires = new List<ThiefData>();
-    private List<GameObject> ThiefHireInfoList = new List<GameObject>();
+    private List<GameObject> GeneratedThiefGOList = new List<GameObject>();
     
     private int maxThievesToGenerate = 15;
 
@@ -118,20 +118,20 @@ public class ThiefInfoGenerator : MonoBehaviour
         if (newThiefHirerInfo != null)
         {
             newThiefHirerInfo.SetThiefData(newThiefData);
-            ThiefHireInfoList.Add(newThiefHirerInfo.gameObject);
+            GeneratedThiefGOList.Add(newThiefHirerInfo.gameObject);
         }
     }
 
     private void HandleOnThiefHired(ThiefData newThiefData)
     {
-        foreach (GameObject newThiefInfo in ThiefHireInfoList)
+        foreach (GameObject newThiefGO in GeneratedThiefGOList)
         {
-            ThiefHirer thiefHirerComponent = newThiefInfo.GetComponent<ThiefHirer>();
+            ThiefHirer thiefHirerComponent = newThiefGO.GetComponent<ThiefHirer>();
             if (thiefHirerComponent != null && thiefHirerComponent.currentHireThiefInfo == newThiefData)
             {
                 GameManager.Instance.AddToHiredThiefList(newThiefData);
-                ThiefHireInfoList.Remove(newThiefInfo);
-                Destroy(newThiefInfo);
+                GeneratedThiefGOList.Remove(newThiefGO);
+                Destroy(newThiefGO);
                 break;
             }
         }
