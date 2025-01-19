@@ -2882,7 +2882,7 @@ GameObject:
   - component: {fileID: 684032215}
   - component: {fileID: 684032214}
   m_Layer: 5
-  m_Name: Show/HideButton_CT
+  m_Name: Show/HideButton_HT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5525,8 +5525,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ongoingJobsPanel: {fileID: 1647312883}
   contractedThievesUIController: {fileID: 1246243955}
+  OJPanel: {fileID: 1647312878}
+  HTPanel: {fileID: 1246243950}
   showHideButton_OJ: {fileID: 408380902}
-  showHideButton_CT: {fileID: 684032214}
+  showHideButton_HT: {fileID: 684032214}
 --- !u!1 &1246243950
 GameObject:
   m_ObjectHideFlags: 0

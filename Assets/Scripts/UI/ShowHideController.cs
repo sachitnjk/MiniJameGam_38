@@ -12,17 +12,32 @@ public class ShowHideController : MonoBehaviour
     [SerializeField] private OngoingJobsPanel ongoingJobsPanel;
     [SerializeField] private ContractedThievesUiController contractedThievesUIController;
     
-    [Header("Button refs")]
+    [Header("UI refs")]
+    [SerializeField] private GameObject OJPanel;
+    [SerializeField] private GameObject HTPanel;
     [SerializeField] private Button showHideButton_OJ;
-    [SerializeField] private Button showHideButton_CT;
+    [SerializeField] private Button showHideButton_HT;
 
     private void Start()
     {
-        if (showHideButton_OJ && showHideButton_CT)
+        OJPanel?.SetActive(false);
+        HTPanel?.SetActive(false);
+        
+        ongoingJobsPanel?.TriggerPanelHide();
+        contractedThievesUIController?.TriggerPanelHide();
+        
+        if (showHideButton_OJ && showHideButton_HT)
         {
             showHideButton_OJ.onClick.AddListener(ShowOJPanel);
-            showHideButton_CT.onClick.AddListener(ShowCTPanel);
+            showHideButton_HT.onClick.AddListener(ShowCTPanel);
         }
+
+        EventManager.Instance.OnCharacterBuffSelected += HandleOnBuffSelected;
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.Instance.OnCharacterBuffSelected -= HandleOnBuffSelected;
     }
 
     private void ShowOJPanel()
@@ -35,5 +50,11 @@ public class ShowHideController : MonoBehaviour
     {
         ongoingJobsPanel?.TriggerPanelHide();
         contractedThievesUIController?.TriggerPanelShow();
+    }
+
+    private void HandleOnBuffSelected(CharacterPassiveBuff buff)
+    {
+        OJPanel?.SetActive(true);
+        HTPanel?.SetActive(true);
     }
 }
