@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class ThiefInfoGenerator : MonoBehaviour
 {
     [SerializeField] private ThiefAppearanceHeadSO _thiefAppearanceHeadSO;
     [SerializeField] private ThiefNameSO _thiefNameSO;
-    [SerializeField] private RectTransform thiefInfoPrefab;
+    [SerializeField] private RectTransform hireThiefInfoPrefab;
     [SerializeField] private Transform thiefInfoParent;
     
     private List<ThiefData> generatedHires = new List<ThiefData>();
@@ -112,7 +113,7 @@ public class ThiefInfoGenerator : MonoBehaviour
 
     private void AddNewThiefToUI(ThiefData newThiefData)
     {
-        GameObject newThiefDataUI = Instantiate(thiefInfoPrefab.gameObject, thiefInfoParent);
+        GameObject newThiefDataUI = Instantiate(hireThiefInfoPrefab.gameObject, thiefInfoParent);
         
         ThiefHirer newThiefHirerInfo = newThiefDataUI.GetComponent<ThiefHirer>();
         if (newThiefHirerInfo != null)
