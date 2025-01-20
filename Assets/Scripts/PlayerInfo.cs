@@ -102,28 +102,28 @@ public class PlayerInfo : MonoBehaviour
 
     private void LevelChangeCheck(int value)
     {
-        if (value > 50000)
+        if (value > 35000)
         {
             LoadNextScene();
         }
         
-        if (value >= 35000)
+        if (value >= 30000)
         {
             currentLevel = 6;
         }
-        else if (value >= 30000)
+        else if (value >= 25000)
         {
             currentLevel = 5;
         }
-        else if (value >= 25000)
+        else if (value >= 20000)
         {
             currentLevel = 4;
         }
-        else if (value >= 20000)
+        else if (value >= 10000)
         {
             currentLevel = 3;
         }
-        else if(value >= 15000)
+        else if(value >= 2000)
         {
             currentLevel = 2;
         }

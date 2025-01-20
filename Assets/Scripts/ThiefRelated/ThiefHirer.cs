@@ -31,7 +31,8 @@ public class ThiefHirer : MonoBehaviour
         }
         else
         {
-            UIManager.Instance?.NotEnoughFundsMessage();
+            UIManager.Instance?._notificationHandler?.AssignAndTriggerNotification(NotificationType.Broke);
+            // UIManager.Instance?.NotEnoughFundsMessage();
         }
     }
 

@@ -10,9 +10,10 @@ public class UIManager : MonoBehaviour
 
     public bool isManagingThieves { get; private set; }
     public GameObject FundsCanvas;
-    [SerializeField] private TextMeshProUGUI notEnoughFundsText;
     [SerializeField] private TextMeshProUGUI totalFundsText;
     [SerializeField] private TextMeshProUGUI levelText;
+    
+    [field: SerializeField] public NotificationHandler _notificationHandler { get; private set; }
 
     private void Awake()
     {
@@ -36,25 +37,15 @@ public class UIManager : MonoBehaviour
         EventManager.Instance.OnCharacterBuffSelected -= EnableMoneyCanvas;
     }
 
-    public void NotEnoughFundsMessage()
-    {
-        if (notEnoughFundsText != null)
-        {
-            notEnoughFundsText.gameObject.GetComponent<Animator>()?.SetBool("isVisible", true);
-            
-            StartCoroutine(DisplayTimer());
-        }
-    }
-    
-    private IEnumerator DisplayTimer()
-    {
-        yield return new WaitForSeconds(3f);
-
-        if (notEnoughFundsText.gameObject.activeSelf)
-        {
-            notEnoughFundsText.gameObject.GetComponent<Animator>()?.SetBool("isVisible", false);
-        }
-    }
+    // public void NotEnoughFundsMessage()
+    // {
+    //     if (notEnoughFundsText != null)
+    //     {
+    //         notEnoughFundsText.gameObject.GetComponent<Animator>()?.SetBool("isVisible", true);
+    //         
+    //         StartCoroutine(DisplayTimer());
+    //     }
+    // }
 
     public void UpdateLevelUI(int level)
     {

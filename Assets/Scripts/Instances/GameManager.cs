@@ -10,9 +10,11 @@ public class GameManager : MonoBehaviour
     [field: SerializeField] public ThiefInfoGenerator thiefInfoGenerator { get; private set; }
     
     [SerializeField] private PlayerInfo playerInfo;
+    
+    [Header("Audio Refernces")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip clickSoundEffectClip;
     public int CurrentMoney { get; private set; }
-
-    // public List<ThiefData> HiredThieves { get; private set; } = new List<ThiefData>();
     public List<ThiefInfoPanelAssigner> ThiefInfoPanels { get; private set; } = new List<ThiefInfoPanelAssigner>();
     
     private void Awake()
@@ -26,7 +28,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         
-        AddMoney(20000);
+        AddMoney(1000);
         UIManager.Instance.FundsCanvas.SetActive(false);
     }
 
@@ -61,8 +63,8 @@ public class GameManager : MonoBehaviour
         EventManager.Instance.InvokeOnMoneyChanged(CurrentMoney);
     }
 
-    public void AddToHiredThiefList(ThiefData thiefData)
+    public void PlayClickSoundEffect()
     {
-        // HiredThieves.Add(thiefData);
+        audioSource.PlayOneShot(clickSoundEffectClip);
     }
 }

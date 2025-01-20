@@ -19,3 +19,10 @@ public enum ThiefTiers
     Brute,
     Professional
 }
+
+public enum NotificationType
+{
+    None,
+    Broke,
+    InadequetThieves
+}
