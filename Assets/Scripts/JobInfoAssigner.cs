@@ -17,14 +17,12 @@ public class JobInfoAssigner : MonoBehaviour
     [SerializeField] private Button assignJobButton;
     [SerializeField] private Button removeJobButton;
     
-    private List<ThiefData> assignedThieves = new List<ThiefData>();
-
     private void Start()
     {
         assignJobButton.onClick.AddListener(AssignJob);
-        removeJobButton.onClick.AddListener(CallRemove);
+        removeJobButton.onClick.AddListener(CallRemoveJob);
 
-        EventManager.Instance.OnJobCompleted -= HandleOnJobCompleted;
+        EventManager.Instance.OnJobCompleted += HandleOnJobCompleted;
     }
 
     private void OnDestroy()
@@ -34,29 +32,21 @@ public class JobInfoAssigner : MonoBehaviour
 
     private void AssignJob()
     {
-        List<ThiefData> eligibleThieves = new List<ThiefData>();
-
-        foreach (ThiefData thief in GameManager.Instance.HiredThieves)
+        
+        foreach (ThiefInfoPanelAssigner thiefInfoPanel in GameManager.Instance.ThiefInfoPanels)
         {
-            if (thief.Tier >= currentJobInfo.requiredTier && !assignedThieves.Contains(thief))
+            if (thiefInfoPanel.currentThiefData.Tier >= currentJobInfo.requiredTier && thiefInfoPanel.assignedJob == null)
             {
-                eligibleThieves.Add(thief);
+                thiefInfoPanel.AssignJob(currentJobInfo);
+                
+                EventManager.Instance.InvokeOnThiefAssigned(thiefInfoPanel.currentThiefData, currentJobInfo);
+                CallRemoveJob();
+                break;
             }
-        }
-
-        if (eligibleThieves.Count != 0)
-        {
-            int randomIndex = UnityEngine.Random.Range(0, eligibleThieves.Count);
-            ThiefData AssignedThief = eligibleThieves[randomIndex];
-            
-            assignedThieves.Add(AssignedThief);
-            
-            EventManager.Instance.InvokeOnThiefAssigned(AssignedThief, currentJobInfo);
-            CallRemove();
         }
     }
     
-    private void CallRemove()
+    private void CallRemoveJob()
     {
         GameManager.Instance.jobInfoGenerator.RemoveJob(this);
     }
@@ -81,11 +71,11 @@ public class JobInfoAssigner : MonoBehaviour
 
     public void HandleOnJobCompleted(JobInfo jobInfo, ThiefData thiefData)
     {
-        foreach (ThiefData assignedThief in assignedThieves)
+        foreach (ThiefInfoPanelAssigner thiefInfoPanel in GameManager.Instance.ThiefInfoPanels)
         {
-            if (assignedThief == thiefData)
+            if (thiefInfoPanel.assignedJob == jobInfo && thiefInfoPanel.currentThiefData == thiefData)
             {
-                assignedThieves.Remove(assignedThief);
+                thiefInfoPanel.EndAssignedJob();
             }
         }
     }

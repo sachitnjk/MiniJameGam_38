@@ -75,8 +75,11 @@ public class ContractedThievesUiController : MonoBehaviour
     {
         GameObject newThiefDataUI = Instantiate(ThiefInfoPrefab.gameObject, thiefDataParent);
         ThiefInfoPanelAssigner instantiatedThiefPanelAssigner = newThiefDataUI.GetComponent<ThiefInfoPanelAssigner>();
+
+        instantiatedThiefPanelAssigner?.InitializeThiefData(thiefData);
+        // instantiatedThiefPanelAssigner?.SetupUI(thiefData);
         
-        instantiatedThiefPanelAssigner?.SetupUI(thiefData);
+        GameManager.Instance.ThiefInfoPanels.Add(instantiatedThiefPanelAssigner);
     }
     
     public void TriggerPanelShow()

@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerInfo playerInfo;
     public int CurrentMoney { get; private set; }
 
-    public List<ThiefData> HiredThieves { get; private set; } = new List<ThiefData>();
+    // public List<ThiefData> HiredThieves { get; private set; } = new List<ThiefData>();
+    public List<ThiefInfoPanelAssigner> ThiefInfoPanels { get; private set; } = new List<ThiefInfoPanelAssigner>();
     
     private void Awake()
     {
@@ -62,6 +63,6 @@ public class GameManager : MonoBehaviour
 
     public void AddToHiredThiefList(ThiefData thiefData)
     {
-        HiredThieves.Add(thiefData);
+        // HiredThieves.Add(thiefData);
     }
 }
